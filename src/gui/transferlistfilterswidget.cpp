@@ -78,24 +78,6 @@ namespace
     {
     public:
         using QCheckBox::QCheckBox;
-
-    private:
-        void paintEvent(QPaintEvent *) override
-        {
-            QPainter painter(this);
-
-            QStyleOptionViewItem indicatorOption;
-            indicatorOption.initFrom(this);
-            indicatorOption.rect = style()->subElementRect(QStyle::SE_CheckBoxIndicator, &indicatorOption, this);
-            indicatorOption.state |= (QStyle::State_Children
-                                      | (isChecked() ? QStyle::State_Open : QStyle::State_None));
-            style()->drawPrimitive(QStyle::PE_IndicatorBranch, &indicatorOption, &painter, this);
-
-            QStyleOptionButton labelOption;
-            initStyleOption(&labelOption);
-            labelOption.rect = style()->subElementRect(QStyle::SE_CheckBoxContents, &labelOption, this);
-            style()->drawControl(QStyle::CE_CheckBoxLabel, &labelOption, &painter, this);
-        }
     };
 }
 
