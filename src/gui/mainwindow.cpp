@@ -178,18 +178,15 @@ MainWindow::MainWindow(QWidget *parent)
     m_ui->actionIncreaseQueuePos->setIcon(UIThemeManager::instance()->getIcon("go-up"));
     m_ui->actionDecreaseQueuePos->setIcon(UIThemeManager::instance()->getIcon("go-down"));
     m_ui->actionBottomQueuePos->setIcon(UIThemeManager::instance()->getIcon("go-bottom"));
-    m_ui->actionDelete->setIcon(UIThemeManager::instance()->getIcon("list-remove"));
+    m_ui->actionDelete->setIcon(UIThemeManager::instance()->getIcon("edit-delete"));
     m_ui->actionDocumentation->setIcon(UIThemeManager::instance()->getIcon("help-contents"));
     m_ui->actionDonateMoney->setIcon(UIThemeManager::instance()->getIcon("wallet-open"));
     m_ui->actionExit->setIcon(UIThemeManager::instance()->getIcon("application-exit"));
     m_ui->actionLock->setIcon(UIThemeManager::instance()->getIcon("object-locked"));
     m_ui->actionOptions->setIcon(UIThemeManager::instance()->getIcon("configure", "preferences-system"));
     m_ui->actionPause->setIcon(UIThemeManager::instance()->getIcon("media-playback-pause"));
-    m_ui->actionPauseAll->setIcon(UIThemeManager::instance()->getIcon("media-playback-pause"));
     m_ui->actionStart->setIcon(UIThemeManager::instance()->getIcon("media-playback-start"));
-    m_ui->actionStartAll->setIcon(UIThemeManager::instance()->getIcon("media-playback-start"));
     m_ui->menuAutoShutdownOnDownloadsCompletion->setIcon(UIThemeManager::instance()->getIcon("application-exit"));
-    m_ui->actionManageCookies->setIcon(UIThemeManager::instance()->getIcon("preferences-web-browser-cookies"));
 
     auto *lockMenu = new QMenu(this);
     QAction *defineUiLockPasswdAct = lockMenu->addAction(tr("&Set Password"));
