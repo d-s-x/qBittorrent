@@ -449,8 +449,6 @@ QVariant TransferListModel::data(const QModelIndex &index, const int role) const
     if (!torrent) return {};
 
     switch (role) {
-    case Qt::ForegroundRole:
-        return stateForeground(torrent->state());
     case Qt::DisplayRole:
         return displayValue(torrent, index.column());
     case UnderlyingDataRole:
