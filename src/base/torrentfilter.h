@@ -46,16 +46,16 @@ public:
     {
         All,
         Downloading,
-        Seeding,
         Completed,
-        Resumed,
-        Paused,
         Active,
         Inactive,
+        Errored,
+        Seeding,
+        Resumed,
+        Paused,
         Stalled,
         StalledUploading,
         StalledDownloading,
-        Errored
     };
 
     // These mean any permutation, including no category / tag.

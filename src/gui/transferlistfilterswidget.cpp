@@ -169,33 +169,15 @@ StatusFilterWidget::StatusFilterWidget(QWidget *parent, TransferListWidget *tran
     auto *downloading = new QListWidgetItem(this);
     downloading->setData(Qt::DisplayRole, tr("Downloading (0)"));
     downloading->setData(Qt::DecorationRole, QIcon(":/icons/skin/downloading.svg"));
-    auto *seeding = new QListWidgetItem(this);
-    seeding->setData(Qt::DisplayRole, tr("Seeding (0)"));
-    seeding->setData(Qt::DecorationRole, QIcon(":/icons/skin/uploading.svg"));
     auto *completed = new QListWidgetItem(this);
     completed->setData(Qt::DisplayRole, tr("Completed (0)"));
     completed->setData(Qt::DecorationRole, QIcon(":/icons/skin/completed.svg"));
-    auto *resumed = new QListWidgetItem(this);
-    resumed->setData(Qt::DisplayRole, tr("Resumed (0)"));
-    resumed->setData(Qt::DecorationRole, QIcon(":/icons/skin/resumed.svg"));
-    auto *paused = new QListWidgetItem(this);
-    paused->setData(Qt::DisplayRole, tr("Paused (0)"));
-    paused->setData(Qt::DecorationRole, QIcon(":/icons/skin/paused.svg"));
     auto *active = new QListWidgetItem(this);
     active->setData(Qt::DisplayRole, tr("Active (0)"));
     active->setData(Qt::DecorationRole, QIcon(":/icons/skin/filteractive.svg"));
     auto *inactive = new QListWidgetItem(this);
     inactive->setData(Qt::DisplayRole, tr("Inactive (0)"));
     inactive->setData(Qt::DecorationRole, QIcon(":/icons/skin/filterinactive.svg"));
-    auto *stalled = new QListWidgetItem(this);
-    stalled->setData(Qt::DisplayRole, tr("Stalled (0)"));
-    stalled->setData(Qt::DecorationRole, QIcon(":/icons/skin/filterstalled.svg"));
-    auto *stalledUploading = new QListWidgetItem(this);
-    stalledUploading->setData(Qt::DisplayRole, tr("Stalled Uploading (0)"));
-    stalledUploading->setData(Qt::DecorationRole, QIcon(":/icons/skin/stalledUP.svg"));
-    auto *stalledDownloading = new QListWidgetItem(this);
-    stalledDownloading->setData(Qt::DisplayRole, tr("Stalled Downloading (0)"));
-    stalledDownloading->setData(Qt::DecorationRole, QIcon(":/icons/skin/stalledDL.svg"));
     auto *errored = new QListWidgetItem(this);
     errored->setData(Qt::DisplayRole, tr("Errored (0)"));
     errored->setData(Qt::DecorationRole, QIcon(":/icons/skin/error.svg"));
@@ -213,54 +195,30 @@ StatusFilterWidget::~StatusFilterWidget()
 void StatusFilterWidget::updateTorrentNumbers()
 {
     int nbDownloading = 0;
-    int nbSeeding = 0;
     int nbCompleted = 0;
-    int nbResumed = 0;
-    int nbPaused = 0;
     int nbActive = 0;
     int nbInactive = 0;
-    int nbStalled = 0;
-    int nbStalledUploading = 0;
-    int nbStalledDownloading = 0;
     int nbErrored = 0;
 
     const QVector<BitTorrent::TorrentHandle *> torrents = BitTorrent::Session::instance()->torrents();
     for (const BitTorrent::TorrentHandle *torrent : torrents) {
         if (torrent->isDownloading())
             ++nbDownloading;
-        if (torrent->isUploading())
-            ++nbSeeding;
         if (torrent->isCompleted())
             ++nbCompleted;
-        if (torrent->isResumed())
-            ++nbResumed;
-        if (torrent->isPaused())
-            ++nbPaused;
         if (torrent->isActive())
             ++nbActive;
         if (torrent->isInactive())
             ++nbInactive;
-        if (torrent->state() ==  BitTorrent::TorrentState::StalledUploading)
-            ++nbStalledUploading;
-        if (torrent->state() ==  BitTorrent::TorrentState::StalledDownloading)
-            ++nbStalledDownloading;
         if (torrent->isErrored())
             ++nbErrored;
     }
 
-    nbStalled = nbStalledUploading + nbStalledDownloading;
-
     item(TorrentFilter::All)->setData(Qt::DisplayRole, tr("All (%1)").arg(torrents.count()));
     item(TorrentFilter::Downloading)->setData(Qt::DisplayRole, tr("Downloading (%1)").arg(nbDownloading));
-    item(TorrentFilter::Seeding)->setData(Qt::DisplayRole, tr("Seeding (%1)").arg(nbSeeding));
     item(TorrentFilter::Completed)->setData(Qt::DisplayRole, tr("Completed (%1)").arg(nbCompleted));
-    item(TorrentFilter::Resumed)->setData(Qt::DisplayRole, tr("Resumed (%1)").arg(nbResumed));
-    item(TorrentFilter::Paused)->setData(Qt::DisplayRole, tr("Paused (%1)").arg(nbPaused));
     item(TorrentFilter::Active)->setData(Qt::DisplayRole, tr("Active (%1)").arg(nbActive));
     item(TorrentFilter::Inactive)->setData(Qt::DisplayRole, tr("Inactive (%1)").arg(nbInactive));
-    item(TorrentFilter::Stalled)->setData(Qt::DisplayRole, tr("Stalled (%1)").arg(nbStalled));
-    item(TorrentFilter::StalledUploading)->setData(Qt::DisplayRole, tr("Stalled Uploading (%1)").arg(nbStalledUploading));
-    item(TorrentFilter::StalledDownloading)->setData(Qt::DisplayRole, tr("Stalled Downloading (%1)").arg(nbStalledDownloading));
     item(TorrentFilter::Errored)->setData(Qt::DisplayRole, tr("Errored (%1)").arg(nbErrored));
 }
 
