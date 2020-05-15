@@ -52,6 +52,9 @@ void TransferListDelegate::paint(QPainter *painter, const QStyleOptionViewItem &
         return;
     }
 
+    QStyleOptionViewItem oldopt = QStyleOptionViewItem(option);
+    oldopt.text = QString("");
+
     QStyleOptionProgressBar newopt;
     newopt.rect = option.rect;
     newopt.text = index.data().toString();
@@ -70,6 +73,7 @@ void TransferListDelegate::paint(QPainter *painter, const QStyleOptionViewItem &
 #endif
 
     painter->save();
+    style->drawControl(QStyle::CE_ItemViewItem, &oldopt, painter, option.widget);
     style->drawControl(QStyle::CE_ProgressBar, &newopt, painter, option.widget);
     painter->restore();
 }
