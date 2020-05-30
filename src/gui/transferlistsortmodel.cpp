@@ -120,7 +120,7 @@ bool TransferListSortModel::lessThan_impl(const QModelIndex &left, const QModelI
         // Thus we can't use the code in the default label.
         if (leftValue != rightValue)
             return leftValue < rightValue;
-        return invokeLessThanForColumn(TransferListModel::TR_QUEUE_POSITION);
+        return !invokeLessThanForColumn(TransferListModel::TR_ADD_DATE);
 
     case TransferListModel::TR_ADD_DATE:
     case TransferListModel::TR_SEED_DATE:
